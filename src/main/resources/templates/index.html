@@ -1,15 +1,96 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html xmlns     = "http://www.w3.org/1999/xhtml"
+      xmlns:th  = "http://www.thymeleaf.org"
+      ng-app    = "App"
+      lang      = "en">
     <head>
-        <meta http-equiv="refresh" content="0;url=app/home"/>
         <title>Bot Admin</title>
-        <script language="javascript">
-            window.location.href = "app/home"
-        </script>
+        <base href="/" />
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+        <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css"/>
+       <!-- <link rel="stylesheet" href="/node_modules/datatables.net-dt/css/jquery.dataTables.css"/>-->
+
+        <link href="/node_modules/datatables-select/css/select.dataTables.css" rel="stylesheet" type="text/css">
+        <link href="/node_modules/datatables-buttons/css/buttons.dataTables.css" rel="stylesheet" type="text/css">
+
+        <link href="/node_modules/datatables.net-dt/css/jquery.dataTables.css" rel="stylesheet" type="text/css">
+
+        <link href="/node_modules/datatables.net-responsive-dt/css/responsive.dataTables.css" rel="stylesheet" type="text/css" >
+        <link href="/node_modules/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+        <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="/node_modules/angular/angular.js"></script>
+        <script src="/node_modules/angular-route/angular-route.js"></script>
+
+        <script src="/node_modules/datatables.net/js/jquery.dataTables.js"></script>
+        <script src="/node_modules/datatables.net-responsive/js/dataTables.responsive.js"></script>
+
+        <script src="/node_modules/bootstrap-notify/bootstrap-notify.js"></script>
+
+        <!--<script src="/node_modules/datatables-select/js/dataTables.select.js"></script>
+        <script src="/node_modules/datatables-buttons/js/dataTables.buttons.js"></script>-->
+<!--        <script src="/node_modules/select2/select2.min.js"></script>-->
+
+
+        <script src="/node_modules/go-data-table/goDataTable.js"></script>
+        <script src="/js/app.js"></script>
+        <script src="/js/controller/main-controller.js"></script>
+        <script src="/js/controller/answer-controller.js"></script>
+        <script src="/js/controller/answer-type-controller.js"></script>
+        <style>
+            .navbar {
+                margin-bottom: 0;
+                border-radius: 0;
+            }
+        </style>
     </head>
     <body>
-        <h1>Bot Admin</h1>
-        <a th:href="@{/app/home}">Entrar</a>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Bot Admin</a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="/">Home</a></li>
+                        <li><a href="#">Perguntas</a></li>
+                        <li><a href="/resposta">Respostas</a></li>
+                        <li><a href="/resposta-tipo">Tipo Respostas</a></li>
+                        <li><a href="#">Parâmetros</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#"><span th:inline="text">[[${#httpServletRequest.remoteUser}]]</span></a>
+                        </li>
+                        <li>
+                            <form  name="flogout" th:action="@{/logout}" method="post">
+                            </form>
+                            <a href="#" onclick="flogout.submit();"><span class="glyphicon glyphicon-log-in"></span> Sair</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!--<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">-->
+            <!--<button type="button" aria-hidden="true" class="close" data-notify="dismiss">×</button>-->
+            <!--<span data-notify="icon"></span>-->
+            <!--<span data-notify="title">{1}</span>-->
+            <!--<span data-notify="message">{2}</span>-->
+            <!--<div class="progress" data-notify="progressbar">-->
+                <!--<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>-->
+            <!--</div>-->
+            <!--<a href="{3}" target="{4}" data-notify="url"></a>-->
+        <!--</div>-->
+        <div class="container-fluid">
+            <div ng-view = ""></div>
+        </div>
     </body>
 </html>

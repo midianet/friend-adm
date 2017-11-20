@@ -13,13 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/answer")
+@RequestMapping("/api/answers")
 public class AnswerResource {
 
     @Autowired
     private AnswerRepository repository;
 
-    @GetMapping("/list")
+    @GetMapping
     public ResponseEntity<User> list(){
         List<User> list = new ArrayList<>();
         list.add(User.builder().id(1L).name("Teste").build());

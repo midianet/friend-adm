@@ -15,10 +15,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
           .authorizeRequests()
-            .antMatchers("/").permitAll()
+            .antMatchers("/login").permitAll()
+            .antMatchers("/").authenticated()//.permitAll()
             .antMatchers("/app/**").authenticated()
-            .antMatchers("/api/**").authenticated()
+            .antMatchers("/api/**").permitAll()   //.authenticated()
             .and()
+            .csrf().disable()
           .formLogin()
             .loginPage("/login")
             .permitAll()
@@ -27,18 +29,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .permitAll();
     }
 
-    protected void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry
-                .addResourceHandler("/public/img/**")
-                .addResourceLocations("/img");
-        registry
-                .addResourceHandler("/public/node_modules/**")
-                .addResourceLocations("/node_mudules");
-
-        registry.addResourceHandler("/public/js/**")
-                .addResourceLocations("/js");
-
-    }
+//    protected void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        registry
+//                .addResourceHandler("/public/img/**")
+//                .addResourceLocations("/img");
+//        registry
+//                .addResourceHandler("/public/node_modules/**")
+//                .addResourceLocations("/node_mudules");
+//
+//        registry.addResourceHandler("/public/js/**")
+//                .addResourceLocations("/js");
+//
+//    }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
