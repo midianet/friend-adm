@@ -15,4 +15,5 @@ dependency-reduced-pom.xml
 .idea/**
 .idea
 *.iml
+.DS_Store
 README.html

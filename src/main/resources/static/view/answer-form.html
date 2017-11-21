@@ -16,7 +16,7 @@
                     </div>
                     <div class="col-md-6 form-group">
                         <label for="type-search">Tipo</label>
-                        <select id="type-search" ng-model="answer.type" data-placeholder="Selecione o tipo" class="form-control" >
+                        <select id="type-search" ng-model="answer.type.id" data-placeholder="Selecione o tipo" class="form-control" required >
                             <option value="">Filtrar por Tipo</option>
                             <option ng-repeat="t in types"  value="{{t.id}}">{{t.method}}</option>
                         </select>

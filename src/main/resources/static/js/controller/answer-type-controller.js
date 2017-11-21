@@ -2,11 +2,6 @@ app.controller('AnswerTypeController', ['$scope','$http','$location','$routePara
                function ($scope,$http,$location,$routeParams) {
         $scope.type = {};
 
-        $scope.clear = function(){
-            $scope.type = {};
-            $scope.frm.$setPristine(true);
-        };
-
         $scope.save = function (){
             var method =  $scope.type.id ? 'PUT' : 'POST';
             var url    =  $scope.type.id ? '/api/answers/types/'  + $scope.type.id : '/api/answers/types/';
