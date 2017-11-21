@@ -26,6 +26,10 @@ app.config(function($routeProvider, $locationProvider) {
             templateUrl: 'view/answer-form.html',
             controller: 'AnswerController'
         })
+        .when('/resposta-form/:id', {
+            templateUrl: 'view/answer-form.html',
+            controller: 'AnswerController'
+        })
         .otherwise({
             rediretTo : '/'
         });

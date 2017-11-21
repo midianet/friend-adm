@@ -1,27 +1,16 @@
 package midianet.friend.adm.resource;
 
-import midianet.friend.adm.domain.Answer;
 import midianet.friend.adm.domain.AnswerType;
-import midianet.friend.adm.domain.User;
 import midianet.friend.adm.repository.AnswerTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.domain.Specification;
-import org.springframework.data.jpa.domain.Specifications;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,6 +22,13 @@ public class AnswerTypeResource {
 
     @Autowired
     private AnswerTypeRepository repository;
+
+
+    @GetMapping
+    public ResponseEntity<List<AnswerType>> list(){
+        final List<AnswerType> list =  repository.findAll(new Sort(Sort.Direction.ASC, "method"));
+        return new ResponseEntity<>(list,HttpStatus.OK);
+    }
 
     @GetMapping(path = "/paginate")
     public ResponseEntity<DataTableResponse> paginate(@RequestParam("draw")                      final Long    draw,

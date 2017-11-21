@@ -4,8 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
+
 import javax.persistence.*;
+import javax.persistence.criteria.Predicate;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -30,5 +35,22 @@ public class Answer {
     @ManyToOne
     @JoinColumn(nullable = false)
     private AnswerType type;
+
+    public static Specification<AnswerType> filter(final Long id, final String description , final Long  typeId ){
+        return  (root, criteriaQuery, criteriaBuilder) -> {
+            final List<Predicate> predicates = new ArrayList<>();
+                if(id != null){
+                predicates.add(criteriaBuilder.equal(root.<Long>get("id"), id));
+            }
+            if(description != null && !description.isEmpty()){
+                predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("description")), "%"+ description.toLowerCase() + "%"));
+            }
+            if(typeId != null){
+                predicates.add(criteriaBuilder.equal(root.get("type").<Long>get("id"), typeId));
+            }
+            return criteriaBuilder.and(predicates.toArray(new Predicate[] {}));
+        };
+    }
+
 
 }
